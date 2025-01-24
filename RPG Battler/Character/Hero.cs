@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,6 @@ namespace RPG_Battler.Character
         public int ExperienceRemaining { get; set; }
         public CombatClass CombatClass { get; set; }
         public List<Item> Items { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Spell> Spells { get; set; }
         public List<Equipment> Equipment { get; set; }
 
         public Hero(CombatClass combatClass)
@@ -29,6 +28,22 @@ namespace RPG_Battler.Character
             Power = 1;
             Luck = 1;
             CombatClass = combatClass;
+        }
+
+        public void PowerLevel(int powerLevel)
+        {
+            // int level = powerLevel / 5;
+            for (int i = 0; i < powerLevel; i++)
+            {
+                LevelUp();
+            }
+        }
+
+        public void AwakenHero()
+        {
+            Random random = new Random();
+            CombatClass = (CombatClass) random.Next(0, 4);
+            PowerLevel(random.Next(8, 13));
         }
 
         public void LevelUp()
@@ -81,9 +96,7 @@ namespace RPG_Battler.Character
             else
             {
                 Console.WriteLine($"Here are {Name} the {CombatClass}'s natural stats with no equipment on:");
-                Console.WriteLine(@$"Health: {Health}
-Power: {Power}
-Luck: {Luck}");
+                Console.WriteLine($"Health: {Health}\nPower: {Power}\nLuck: {Luck}");
             }
         }
     }
