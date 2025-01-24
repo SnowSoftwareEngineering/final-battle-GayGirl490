@@ -20,14 +20,13 @@ namespace RPG_Battler.Character
         public List<Item> Items { get; set; }
         public List<Equipment> Equipment { get; set; }
 
-        public Hero(CombatClass combatClass)
+        public Hero(string name = "Unknown")
         {
-            Name = "Unknown";
+            Name = name;
             Level = 0;
             Health = 1;
             Power = 1;
             Luck = 1;
-            CombatClass = combatClass;
         }
 
         public void PowerLevel(int powerLevel)
@@ -41,8 +40,8 @@ namespace RPG_Battler.Character
 
         public void AwakenHero()
         {
-            Random random = new Random();
-            CombatClass = (CombatClass) random.Next(0, 4);
+            Random random = new Random(); // this random is only used locally within this method.
+            CombatClass = (CombatClass) random.Next(1, 4);
             PowerLevel(random.Next(8, 13));
         }
 
